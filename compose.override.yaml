@@ -1,0 +1,21 @@
+
+services:
+###> doctrine/doctrine-bundle ###
+  database:
+    ports:
+      # port vers mariaDB pour l'accès externe si nécessaire
+      - "3306:3306"
+###< doctrine/doctrine-bundle ###
+
+###> symfony/mailer ###
+  mailer:
+    image: axllent/mailpit
+    ports:
+      - "1025"
+      - "8025"
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+    networks:
+      - symfony-network # Ajoutez cette ligne si le réseau est défini dans docker-compose.yml
+###< symfony/mailer ###

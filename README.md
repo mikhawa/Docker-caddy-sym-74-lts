@@ -4,7 +4,7 @@
 
 Sous WSL2 de Windows 11
 
-Pour travailler, lancer Docker et entrez dans le conteneur PHP après l(installation de c)
+## Raccourcis utiles
 
     docker compose up -d --build
     docker compose exec -it php bash
@@ -232,4 +232,98 @@ Symfony : http://localhost:8765/
 PHPMyAdmin : http://localhost:8080/ avec app_user
 et app_password
 
+## Installation de `compose.override.yaml`
 
+```yaml
+
+services:
+  ###> doctrine/doctrine-bundle ###
+  database:
+    ports:
+      # port vers mariaDB pour l'accès externe si nécessaire
+      - "3306:3306"
+  ###< doctrine/doctrine-bundle ###
+
+  ###> symfony/mailer ###
+  mailer:
+    image: axllent/mailpit
+    ports:
+      - "1025"
+      - "8025"
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+    networks:
+      - symfony-network # Ajoutez cette ligne si le réseau est défini dans docker-compose.yml
+###< symfony/mailer ###
+
+
+```
+
+Puis :
+
+    docker compose down
+    docker compose up -d --build
+
+## .env
+
+Modifier dans le fichier `.env` :
+
+
+```dotenv
+# ...
+
+###> symfony/framework-bundle ###
+APP_ENV=dev
+APP_SECRET=
+APP_SHARE_DIR=var/share
+###< symfony/framework-bundle ###
+
+###> symfony/routing ###
+# Configure how to generate URLs in non-HTTP contexts, such as CLI commands.
+# See https://symfony.com/doc/current/routing.html#generating-urls-in-commands
+DEFAULT_URI=http://localhost
+###< symfony/routing ###
+
+###> doctrine/doctrine-bundle ###
+# ...
+# DATABASE_URL="postgresql://app:!ChangeMe!@127.0.0.1:5432/app?serverVersion=16&charset=utf8"
+# .env
+DATABASE_URL="mysql://app_user:app_password@database:3306/app_db?serverVersion=11.4-MariaDB&charset=utf8mb4"
+###< doctrine/doctrine-bundle ###
+
+### ...
+
+###> symfony/mailer ###
+MAILER_DSN=smtp://mailer:1025
+###< symfony/mailer ###
+```
+
+## Accès aux logs
+
+    docker compose logs -f caddy
+    docker compose logs -f php
+    docker compose logs -f database
+    docker compose logs -f pma
+    docker compose logs -f mailer
+    docker compose logs -f mailpit
+    docker compose logs -f
+
+## Arrêt des conteneurs
+    docker compose down
+## Redémarrage des conteneurs
+    docker compose up -d
+## Reconstruction des conteneurs
+    docker compose up -d --build
+## Accès au conteneur PHP
+    docker compose exec -it php bash
+## Accès au conteneur Caddy
+    docker compose exec -it caddy sh
+## Accès au conteneur MariaDB
+    docker compose exec -it database bash
+## Accès au conteneur PHPMyAdmin
+    docker compose exec -it pma bash
+## Accès au conteneur Mailpit
+    docker compose exec -it mailer sh
+## Accès au conteneur Mailpit (ancien nom mailpit)
+    docker compose exec -it mailpit sh
