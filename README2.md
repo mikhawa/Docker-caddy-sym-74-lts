@@ -62,3 +62,14 @@ Utilisons-le comme page d'accueil
 ### Exécutons les tests
 
     php bin/phpunit
+
+### Créons une entité
+
+    php bin/console make:entity Article
+    # title:string(150)-notnull
+    # slug:string(154)-notnull
+    # text:text-notnull
+    # createdAt:datetime_immutable-null
+    # updatedAt:datetime_immutable-null
+    # publishedAt:datetime_immutable-null
+    # isPublished:boolean-null
