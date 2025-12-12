@@ -10,6 +10,16 @@
     docker compose up -d --build
     docker compose exec -it php bash
 
+## Voir les urls disponibles
+
+    Symfony : 
+
+http://localhost:8765/
+
+    PHPMyAdmin : 
+
+http://localhost:8080/
+
 ### Exécutons un composer update
 
     composer update
