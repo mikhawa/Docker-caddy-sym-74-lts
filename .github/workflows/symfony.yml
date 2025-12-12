@@ -34,7 +34,7 @@ jobs:
       - name: Install dependencies (if composer missing in image you can use composer image)
         
         run: |
-          docker compose exec -T php bash -lc "composer install --no-interaction"
+          docker compose exec -T --user appuser php bash -lc "composer install --no-interaction"
 
       - name: Create test database
         run: |
