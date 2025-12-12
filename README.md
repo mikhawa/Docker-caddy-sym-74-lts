@@ -27,6 +27,10 @@ Installez `Docker Desktop sous Windows` :
 
 https://docs.docker.com/desktop/setup/install/windows-install/
 
+Vérifiez que WSL2 est bien activé dans les paramètres de Docker Desktop :
+
+    Paramètres > Ressources > WSL Integration
+
 ## Créez Ubuntu sur WSL2
 
     wsl --install

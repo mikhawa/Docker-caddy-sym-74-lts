@@ -79,7 +79,7 @@ Utilisons-le comme page d'accueil
 
     php bin/phpunit
 
-### Créons une entité
+### Créons une entité Article
 
     php bin/console make:entity Article
     # title:string(150)-notnull
@@ -90,7 +90,74 @@ Utilisons-le comme page d'accueil
     # publishedAt:datetime_immutable-null
     # isPublished:boolean-null
 
-### Créons la première migration
+### Créons la première migration d'Article
+
+    php bin/console make:migration
+    php bin/console doctrine:migrations:migrate # > yes
+
+### Modifions l'entité Article pour ajouter des valeurs par défaut
+
+Celà modifiera les colonnes de la base de données `#[ORM\Column(àjouter les options)]` et les contraintes de validation des formulaires `#[Assert\...]`.
+
+```php
+
+// src/Entity/Article.php
+
+# ...
+
+# utilisation des contraintes de validation
+use Symfony\Component\Validator\Constraints as Assert;
+
+# ...
+
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(options: ['unsigned' => true])] // entier non signé
+    private ?int $id = null;
+
+    #[ORM\Column(length: 150)]
+    #[Assert\NotBlank(message: 'Le titre ne peut pas être vide.')]
+    #[Assert\Length(
+        min: 3,
+        max: 150,
+        minMessage: 'Le titre doit comporter au moins {{ limit }} caractères.',
+        maxMessage: 'Le titre ne peut pas dépasser {{ limit }} caractères.'
+    )]
+    private ?string $title = null;
+
+    #[ORM\Column(length: 154, unique: true)]
+    #[Assert\NotBlank(message: 'Le slug ne peut pas être vide.')]
+    #[Assert\Length(
+        min: 7,
+        max: 154,
+        minMessage: 'Le slug doit comporter au moins {{ limit }} caractères.',
+        maxMessage: 'Le slug ne peut pas dépasser {{ limit }} caractères.'
+    )]
+    private ?string $slug = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message: 'Le texte ne peut pas être vide.')]
+    #[Assert\Length(
+        min: 20,
+        minMessage: 'Le texte doit comporter au moins {{ limit }} caractères.'
+    )]
+    private ?string $text = null;
+
+    #[ORM\Column(nullable: true, options: ['default' => 'CURRENT_TIMESTAMP'])]
+    private ?\DateTimeImmutable $createAt = null;
+
+    #[ORM\Column(nullable: true, options: ['default' => null])]
+    private ?\DateTimeImmutable $updateAt = null;
+
+    #[ORM\Column(nullable: true, options: ['default' => null])]
+    private ?\DateTimeImmutable $publishAt = null;
+
+    #[ORM\Column(nullable: true, options: ['default' => false])]
+    private ?bool $isPublished = null;
+# ...
+```
+
+### Créons la deuxième migration d'Article
 
     php bin/console make:migration
     php bin/console doctrine:migrations:migrate # > yes

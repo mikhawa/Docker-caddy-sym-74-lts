@@ -1,39 +1,63 @@
 <?php
 
+// src/Entity/Article.php
+
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+# utilisation des contraintes de validation
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 class Article
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(options: ['unsigned' => true])] // entier non signé
     private ?int $id = null;
 
     #[ORM\Column(length: 150)]
+    #[Assert\NotBlank(message: 'Le titre ne peut pas être vide.')]
+    #[Assert\Length(
+        min: 3,
+        max: 150,
+        minMessage: 'Le titre doit comporter au moins {{ limit }} caractères.',
+        maxMessage: 'Le titre ne peut pas dépasser {{ limit }} caractères.'
+    )]
     private ?string $title = null;
 
-    #[ORM\Column(length: 154)]
+    #[ORM\Column(length: 154, unique: true)]
+    #[Assert\NotBlank(message: 'Le slug ne peut pas être vide.')]
+    #[Assert\Length(
+        min: 7,
+        max: 154,
+        minMessage: 'Le slug doit comporter au moins {{ limit }} caractères.',
+        maxMessage: 'Le slug ne peut pas dépasser {{ limit }} caractères.'
+    )]
     private ?string $slug = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message: 'Le texte ne peut pas être vide.')]
+    #[Assert\Length(
+        min: 20,
+        minMessage: 'Le texte doit comporter au moins {{ limit }} caractères.'
+    )]
     private ?string $text = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(nullable: true, options: ['default' => 'CURRENT_TIMESTAMP'])]
     private ?\DateTimeImmutable $createAt = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(nullable: true, options: ['default' => null])]
     private ?\DateTimeImmutable $updateAt = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(nullable: true, options: ['default' => null])]
     private ?\DateTimeImmutable $publishAt = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(nullable: true, options: ['default' => false])]
     private ?bool $isPublished = null;
+
 
     public function getId(): ?int
     {
@@ -123,4 +147,5 @@ class Article
 
         return $this;
     }
+
 }
