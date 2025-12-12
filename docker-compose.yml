@@ -1,0 +1,66 @@
+services:
+  # --- Service PHP Application ---
+  php:
+    build:
+      context: .
+      args:
+        UID: 1000 # Correspond généralement à l'utilisateur WSL par défaut
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - symfony-network
+
+  # --- Service Web Server (Caddy) ---
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "8765:80"
+    volumes:
+      - ./:/var/www/html
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - php
+    networks:
+      - symfony-network
+
+  # --- Service Base de Données (MariaDB) ---
+  database:
+    image: mariadb:11.4 # Version stable récente
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: app_db
+      MARIADB_USER: app_user
+      MARIADB_PASSWORD: app_password
+    # Force InnoDB engine (bien que ce soit le défaut, c'est explicite)
+    command: --default-storage-engine=innodb
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - symfony-network
+
+  # --- Service Administration BDD (PHPMyAdmin) ---
+  pma:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: database
+      UPLOAD_LIMIT: 64M
+    depends_on:
+      - database
+    networks:
+      - symfony-network
+
+volumes:
+  caddy_data:
+  caddy_config:
+  db_data:
+
+networks:
+  symfony-network:
+    driver: bridge

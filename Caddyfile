@@ -1,0 +1,13 @@
+:80 {
+    # Racine du projet Symfony
+    root * /var/www/html/public
+
+    # Envoie les requêtes PHP au conteneur PHP-FPM
+    php_fastcgi php:9000
+
+    # Compression Gzip pour la performance
+    encode gzip
+
+    # Servir les fichiers statiques s'ils existent
+    file_server
+}
