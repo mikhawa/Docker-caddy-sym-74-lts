@@ -25,7 +25,11 @@ jobs:
 
       - name: git ok
         run: |
-          git config --global --add safe.directory /var/www/html
+          docker compose exec php git config --global --add safe.directory /var/www/html
+      - name: git user
+        run: |
+          docker compose exec php git config --global user.email michaeljpitz@gmail.com
+          docker compose exec php git config --global user.name mikhawa
 
       - name: Install dependencies (if composer missing in image you can use composer image)
         
