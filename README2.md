@@ -73,3 +73,8 @@ Utilisons-le comme page d'accueil
     # updatedAt:datetime_immutable-null
     # publishedAt:datetime_immutable-null
     # isPublished:boolean-null
+
+### Créons la première migration
+
+    php bin/console make:migration
+    php bin/console doctrine:migrations:migrate # > yes
