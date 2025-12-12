@@ -7,7 +7,7 @@ namespace App\Entity;
 use App\Repository\ArticleRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-# utilisation des contraintes de validation
+// utilisation des contraintes de validation
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
@@ -57,7 +57,6 @@ class Article
 
     #[ORM\Column(nullable: true, options: ['default' => false])]
     private ?bool $isPublished = null;
-
 
     public function getId(): ?int
     {
@@ -147,5 +146,4 @@ class Article
 
         return $this;
     }
-
 }
