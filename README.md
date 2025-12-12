@@ -9,6 +9,7 @@ Sous WSL2 de Windows 11
     docker compose up -d --build
     docker compose exec -it php bash
 
+    exit pour sortir (du conteneur) pour git par exemple
 
 ## Installation de Docker
 
