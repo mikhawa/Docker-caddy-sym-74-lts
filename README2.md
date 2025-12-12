@@ -10,6 +10,12 @@
     docker compose up -d --build
     docker compose exec -it php bash
 
+    # quittez le conteneur php avec exit pour git par exemple
+    exit
+
+    # Fermeture de tous les conteneurs
+    docker compose down
+
 ## Voir les urls disponibles
 
     Symfony : 
