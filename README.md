@@ -1,8 +1,18 @@
 # caddy-sym-74-lts
 
-### Avec PHP 8.4, MariaDB, PHPMyAdmin  et Caddy
+### Avec PHP 8.4, MariaDB, PHPMyAdmin, mailpit et Caddy
 
 Sous WSL2 de Windows 11
+
+## Menu
+- Installation sous WSL2 de Windows 11
+- Création des fichiers Dockerfile, Caddyfile et docker-compose.yml
+- Création d'un projet Symfony 7.4 LTS
+- Installation de compose.override.yaml pour mailpit et port 3306 MariaDB
+- Modification du fichier .env de Symfony
+- Accès aux logs des conteneurs
+- [Partie 2 Utilisation de Symfony avec Docker](README2.md)
+
 
 ## Raccourcis utiles
 
@@ -302,6 +312,8 @@ MAILER_DSN=smtp://mailer:1025
 
 ## Accès aux logs
 
+    # exite pour sortir du conteneur
+
     docker compose logs -f caddy
     docker compose logs -f php
     docker compose logs -f database
@@ -310,21 +322,26 @@ MAILER_DSN=smtp://mailer:1025
     docker compose logs -f mailpit
     docker compose logs -f
 
-## Arrêt des conteneurs
+### Arrêt des conteneurs
     docker compose down
-## Redémarrage des conteneurs
+### Redémarrage des conteneurs
     docker compose up -d
-## Reconstruction des conteneurs
+### Reconstruction des conteneurs
     docker compose up -d --build
-## Accès au conteneur PHP
+### Accès au conteneur PHP
     docker compose exec -it php bash
-## Accès au conteneur Caddy
+### Accès au conteneur Caddy
     docker compose exec -it caddy sh
-## Accès au conteneur MariaDB
+### Accès au conteneur MariaDB
     docker compose exec -it database bash
-## Accès au conteneur PHPMyAdmin
+### Accès au conteneur PHPMyAdmin
     docker compose exec -it pma bash
-## Accès au conteneur Mailpit
+### Accès au conteneur Mailpit
     docker compose exec -it mailer sh
-## Accès au conteneur Mailpit (ancien nom mailpit)
+### Accès au conteneur Mailpit (ancien nom mailpit)
     docker compose exec -it mailpit sh
+
+
+[Menu](#Menu)
+
+[Partie 2 Utilisation de Symfony avec Docker](README2.md)
