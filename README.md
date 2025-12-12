@@ -300,7 +300,7 @@ DEFAULT_URI=http://localhost
 # ...
 # DATABASE_URL="postgresql://app:!ChangeMe!@127.0.0.1:5432/app?serverVersion=16&charset=utf8"
 # .env
-DATABASE_URL="mysql://app_user:app_password@database:3306/app_db?serverVersion=11.4-MariaDB&charset=utf8mb4"
+DATABASE_URL="mysql://app_user:app_password@database:3306/app_db?serverVersion=11.4.9-MariaDB-ubu2404&charset=utf8mb4"
 ###< doctrine/doctrine-bundle ###
 
 ### ...

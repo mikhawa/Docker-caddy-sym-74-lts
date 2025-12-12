@@ -20,5 +20,45 @@
 ### Installons PHP CS Fixer
 
     composer require --dev friendsofphp/php-cs-fixer
+    # Pour exécuter PHP CS Fixer
+    ./vendor/bin/php-cs-fixer fix
 
 ### Créons un contrôleur
+
+    php bin/console make:controller MainController
+    # > yes pour les tests
+
+Utilisons-le comme page d'accueil
+```php
+
+// src/Controller/MainController.php
+# ...
+    #[Route('/', name: 'homepage')]
+    public function index(): Response
+    {
+        return $this->render('main/index.html.twig', [
+            'controller_name' => 'MainController',
+        ]);
+    }
+# ...
+```
+### Modifions le test
+
+```php
+
+// tests/Controller/MainControllerTest.php
+
+    # ...
+    public function testIndex(): void
+    {
+        $client = static::createClient();
+        $client->request('GET', '/');
+
+        self::assertResponseIsSuccessful();
+    }
+    # ...
+```
+
+### Exécutons les tests
+
+    php bin/phpunit
