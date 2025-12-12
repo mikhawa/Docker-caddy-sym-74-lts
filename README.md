@@ -4,6 +4,12 @@
 
 Sous WSL2 de Windows 11
 
+Pour travailler, lancer Docker et entrez dans le conteneur PHP après l(installation de c)
+
+    docker compose up -d --build
+    docker compose exec -it php bash
+
+
 ## Installation de Docker
 
 Installez `Docker Desktop sous Windows` : 
@@ -217,7 +223,7 @@ Puis update
 
 Pour fermer:
 
-docker compose down
+    docker compose down
 
 URL :
 Symfony : http://localhost:8765/
