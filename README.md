@@ -4,6 +4,8 @@
 
 Sous WSL2 de Windows 11
 
+---
+
 ## Menu
 - Installation sous WSL2 de Windows 11
 - Création des fichiers Dockerfile, Caddyfile et docker-compose.yml
@@ -13,7 +15,9 @@ Sous WSL2 de Windows 11
 - Modification du fichier .env de Symfony
 - Accès aux logs des conteneurs
 - [Partie 2 Utilisation de Symfony avec Docker](README2.md)
+- [Partie 3 Création des entités et migrations avec Symfony et Docker](README3.md)
 
+---
 
 ## Raccourcis utiles
 
