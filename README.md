@@ -9,6 +9,7 @@ Sous WSL2 de Windows 11
 - Création des fichiers Dockerfile, Caddyfile et docker-compose.yml
 - Création d'un projet Symfony 7.4 LTS
 - Installation de compose.override.yaml pour mailpit et port 3306 MariaDB
+- Voir les URL disponibles
 - Modification du fichier .env de Symfony
 - Accès aux logs des conteneurs
 - [Partie 2 Utilisation de Symfony avec Docker](README2.md)
@@ -204,8 +205,10 @@ Puis rentrer dans PHP pour travailler :
 
     docker compose exec -it php bash
 
-(exit pour sortir)
+    # quittez le conteneur php 
+    exit
 
+    # fermer Docker    
     docker compose down
 
 Créer Symfony dans un dossier temporaire :
@@ -240,12 +243,6 @@ Pour fermer:
 
     docker compose down
 
-URL :
-Symfony : http://localhost:8765/
-
-
-PHPMyAdmin : http://localhost:8080/ avec app_user
-et app_password
 
 ## Installation de `compose.override.yaml`
 
@@ -279,6 +276,17 @@ Puis :
 
     docker compose down
     docker compose up -d --build
+
+## Voir les URL disponibles
+
+URL :
+Symfony : http://localhost:8765/
+
+
+PHPMyAdmin : http://localhost:8080/ avec app_user
+et app_password
+
+Mailpit : http://localhost:54653/
 
 ## .env
 

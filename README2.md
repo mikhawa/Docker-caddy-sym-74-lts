@@ -26,6 +26,10 @@ http://localhost:8765/
 
 http://localhost:8080/
 
+    Mailpit :
+
+http://localhost:54653/
+
 ### Exécutons un composer update
 
     composer update
