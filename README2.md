@@ -2,7 +2,6 @@
 
 ## Partie 2 Utilisation de Symfony avec Docker
 
----
 
 ## Menu
 - [Partie 1](README.md)
@@ -16,7 +15,6 @@
   - [Exécutons les tests](#exécutons-les-tests)
 - [partie 3](README3.md)
 
----
 
 ## Travaillons dans Symfony
 

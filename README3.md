@@ -2,7 +2,6 @@
 
 ## Partie 3 Création des entités et migrations avec Symfony et Docker
 
----
 
 ## Menu
 - [Partie 1](README.md)
@@ -13,7 +12,6 @@
   - [Modifions l'entité Article pour ajouter des valeurs par défaut](#modifions-lentité-article-pour-ajouter-des-valeurs-par-défaut)
   - [Créons la deuxième migration d'Article](#créons-la-deuxième-migration-darticle)
 
----
 
 ## Vue d'ensemble des entités et relations
 

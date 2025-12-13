@@ -4,7 +4,6 @@
 
 Sous WSL2 de Windows 11
 
----
 
 ## Menu
 - Installation sous WSL2 de Windows 11
@@ -17,7 +16,6 @@ Sous WSL2 de Windows 11
 - [Partie 2 Utilisation de Symfony avec Docker](README2.md)
 - [Partie 3 Création des entités et migrations avec Symfony et Docker](README3.md)
 
----
 
 ## Raccourcis utiles
 
