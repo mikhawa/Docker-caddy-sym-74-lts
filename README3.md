@@ -52,6 +52,11 @@ Voici un aperçu des entités que nous allons créer pour notre application de b
 
 ## Créons une entité Article
 
+    # ne pas oublier d'entrer dans le conteneur php
+    docker compose exec -it php bash
+ 
+    # :/var/www/html$
+
     php bin/console make:entity Article
     # title:string(150)-notnull
     # slug:string(154)-notnull
@@ -144,4 +149,27 @@ use Symfony\Component\Validator\Constraints as Assert;
 [Menu](#menu)
 
 ---
+
+## Créons une entité Category
+
+    php bin/console make:entity Category
+    # title:string(100)-notnull
+    # slug:string(104)-notnull
+    # description:string(600)-null
+    # level:integer-null
+
+---
+
+[Menu](#menu)
+
+---
+
+### Créons la première migration de Category
+
+    php bin/console make:migration
+    php bin/console doctrine:migrations:migrate # > yes
+
+### Modifions l'entité Category pour ajouter des valeurs par défaut
+
+Celà modifiera les colonnes de la base de données `#[ORM\Column(àjouter les options)]` et les contraintes de validation des formulaires `#[Assert\...]`.
 

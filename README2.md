@@ -13,7 +13,7 @@
 - [Créons un contrôleur](#créons-un-contrôleur)
   - [Modifions le test](#modifions-le-test)
   - [Exécutons les tests](#exécutons-les-tests)
-- [partie 3](README3.md)
+- [Partie 3](README3.md)
 
 
 ## Travaillons dans Symfony
