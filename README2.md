@@ -4,6 +4,19 @@
 
 ## Menu
 - [Partie 1](README.md)
+- [Travaillons dans Symfony](#travaillons-dans-symfony)
+- [Voir les urls disponibles](#voir-les-urls-disponibles)
+  - [Exécutons un composer update](#exécutons-un-composer-update)
+  - [Vérifions les exigences de Symfony](#vérifions-les-exigences-de-symfony)
+- [Installons PHP CS Fixer](#installons-php-cs-fixer)
+- [Créons un contrôleur](#créons-un-contrôleur)
+  - [Modifions le test](#modifions-le-test)
+  - [Exécutons les tests](#exécutons-les-tests)
+- [Vue d'ensemble des entités et relations](#vue-densemble-des-entités-et-relations)
+- [Créons une entité Article](#créons-une-entité-article)
+  - [Créons la première migration d'Article](#créons-la-première-migration-darticle)
+  - [Modifions l'entité Article pour ajouter des valeurs par défaut](#modifions-lentité-article-pour-ajouter-des-valeurs-par-défaut)
+  - [Créons la deuxième migration d'Article](#créons-la-deuxième-migration-darticle)
 
 ## Travaillons dans Symfony
 
@@ -16,7 +29,7 @@
     # Fermeture de tous les conteneurs
     docker compose down
 
-## Voir les urls disponibles
+## Voir les URLs disponibles
 
     Symfony : 
 
@@ -37,13 +50,13 @@ http://localhost:54653/
 ### Vérifions les exigences de Symfony
     symfony check:req
 
-### Installons PHP CS Fixer
+## Installons PHP CS Fixer
 
     composer require --dev friendsofphp/php-cs-fixer
     # Pour exécuter PHP CS Fixer
     ./vendor/bin/php-cs-fixer fix
 
-### Créons un contrôleur
+## Créons un contrôleur
 
     php bin/console make:controller MainController
     # > yes pour les tests
@@ -83,7 +96,39 @@ Utilisons-le comme page d'accueil
 
     php bin/phpunit
 
-### Créons une entité Article
+## Vue d'ensemble des entités et relations
+
+Voici un aperçu des entités que nous allons créer pour notre application de blog Symfony, ainsi que les relations entre elles.
+
+### Nous allons créer les entités suivantes pour ce blog :
+- Catégorie (`Category`)
+- Article (`Article`)
+- Commentaire (`Comment`)
+- Utilisateur (`User`)
+- Tag (`Tag`)
+
+### Relations entre les entités :
+- Un `Article` peut appartenir à 0, 1 ou toutes les Catégories (ManyToMany)
+- Un `Article` peut avoir 0, 1 ou plusieurs Commentaires (OneToMany)
+- Un `Article` est écrit par un seul Utilisateur (ManyToOne)
+- Un `Article` peut avoir 0, 1 ou plusieurs Tags (ManyToMany)
+---
+- Un `User` peut écrire plusieurs Articles (OneToMany)
+- Un `User` peut écrire plusieurs Commentaires (OneToMany)
+--- 
+- Un `Tag` peut être associé à 0, 1 ou plusieurs Articles (ManyToMany)
+---
+- Un `Comment` est écrit par un seul Utilisateur (ManyToOne)
+- Un `Comment` appartient à un seul Article (ManyToOne)
+--- 
+- Une `Category` peut contenir 0, 1 ou plusieurs Articles (ManyToMany)
+
+
+### Image récapitulative des entités et relations
+![Entités et relations](datas/db-schema.png)
+
+
+## Créons une entité Article
 
     php bin/console make:entity Article
     # title:string(150)-notnull
@@ -165,3 +210,4 @@ use Symfony\Component\Validator\Constraints as Assert;
 
     php bin/console make:migration
     php bin/console doctrine:migrations:migrate # > yes
+
