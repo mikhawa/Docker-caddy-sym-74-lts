@@ -201,3 +201,106 @@ class Category
 [Menu](#menu)
 
 ---
+
+## Jointure des entités Article et Category (ManyToMany)
+    php bin/console make:entity Article
+    # categories: ManyToMany
+    # What class should this entity be related to: Category
+    # Do you want to add a new property to Category so that you can access/update Article objects from it - e.g. $category->getArticles()? (yes/no) yes
+    #  A new property will also be added to the Category class so that you can access the related Article objects from it [articles]
+
+### Les jointures ManyToMany créent automatiquement une table de jointure dans la base de données. Ainsi que des méthodes d'ajout et de suppression dans les entités.
+
+#### Article.php
+
+```php
+// src/Entity/Article.php
+# ...
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+# ...
+
+    #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'articles')]
+    private Collection $categories;
+
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+    }
+
+        /**
+     * @return Collection<int, Category>
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $category): static
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): static
+    {
+        $this->categories->removeElement($category);
+
+        return $this;
+    }
+# ...
+```
+#### Category.php
+
+```php
+// src/Entity/Category.php
+# ...
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+# ... 
+    #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'categories')]
+    private Collection $articles;
+
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection<int, Article>
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Article $article): static
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles->add($article);
+            $article->addCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Article $article): static
+    {
+        if ($this->articles->removeElement($article)) {
+            $article->removeCategory($this);
+        }
+
+        return $this;
+    }
+# ...
+```
+### Créons la migration pour la jointure ManyToMany
+
+    php bin/console make:migration
+    php bin/console doctrine:migrations:migrate # > yes
+---
+[Menu](#menu)
+---
