@@ -14,7 +14,8 @@ Sous WSL2 de Windows 11
 - Modification du fichier .env de Symfony
 - Accès aux logs des conteneurs
 - [Partie 2 Utilisation de Symfony avec Docker](README2.md)
-- [Partie 3 Création des entités et migrations avec Symfony et Docker](README3.md)
+- [Partie 3 Vue d'ensemble des entités et relations](README3.md)
+- [Partie 4 Création des entités et migrations avec Symfony et Docker](README4.md)
 
 
 ## Raccourcis utiles
@@ -359,3 +360,6 @@ MAILER_DSN=smtp://mailer:1025
 [Menu](#Menu)
 
 [Partie 2 Utilisation de Symfony avec Docker](README2.md)
+
+[Partie 3 Vue d'ensemble des entités et relations](README3.md)
+[Partie 4 Création des entités et migrations avec Symfony et Docker](README4.md)
