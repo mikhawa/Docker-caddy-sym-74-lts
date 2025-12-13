@@ -29,6 +29,12 @@
     # Fermeture de tous les conteneurs
     docker compose down
 
+---
+
+[Menu](#menu)
+
+---
+
 ## Voir les URLs disponibles
 
     Symfony : 
@@ -43,6 +49,12 @@ http://localhost:8080/
 
 http://localhost:54653/
 
+---
+
+[Menu](#menu)
+
+---
+
 ### Exécutons un composer update
 
     composer update
@@ -55,6 +67,12 @@ http://localhost:54653/
     composer require --dev friendsofphp/php-cs-fixer
     # Pour exécuter PHP CS Fixer
     ./vendor/bin/php-cs-fixer fix
+
+---
+
+[Menu](#menu)
+
+---
 
 ## Créons un contrôleur
 
@@ -96,6 +114,12 @@ Utilisons-le comme page d'accueil
 
     php bin/phpunit
 
+---
+
+[Menu](#menu)
+
+---
+
 ## Vue d'ensemble des entités et relations
 
 Voici un aperçu des entités que nous allons créer pour notre application de blog Symfony, ainsi que les relations entre elles.
@@ -127,6 +151,11 @@ Voici un aperçu des entités que nous allons créer pour notre application de b
 ### Image récapitulative des entités et relations
 ![Entités et relations](datas/db-schema.png)
 
+---
+
+[Menu](#menu)
+
+---
 
 ## Créons une entité Article
 
@@ -138,6 +167,12 @@ Voici un aperçu des entités que nous allons créer pour notre application de b
     # updatedAt:datetime_immutable-null
     # publishedAt:datetime_immutable-null
     # isPublished:boolean-null
+
+---
+
+[Menu](#menu)
+
+---
 
 ### Créons la première migration d'Article
 
@@ -210,4 +245,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 
     php bin/console make:migration
     php bin/console doctrine:migrations:migrate # > yes
+
+---
+
+[Menu](#menu)
+
+---
 
