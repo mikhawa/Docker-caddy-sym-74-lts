@@ -16,7 +16,8 @@
   - [Créons la première migration de Category](#créons-la-première-migration-de-category)
   - [Modifions l'entité Category pour ajouter des valeurs par défaut](#modifions-lentité-category-pour-ajouter-des-valeurs-par-défaut)
   - [Créons la deuxième migration de Category](#créons-la-deuxième-migration-de-category)
-
+- [Jointure des entités Article et Category (ManyToMany)](#jointure-des-entités-article-et-category-manytomany)
+- [Partie 5](README5.md)
 
 
 ## Créons une entité Article
