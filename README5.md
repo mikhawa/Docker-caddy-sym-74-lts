@@ -49,6 +49,32 @@ Celà modifiera les colonnes de la base de données `#[ORM\Column(àjouter les o
     # ajouter les champs suivants :
     # password:string(255)-notnull
     #  email:string(200)-notnull
-    #  uniqdI:string(255)-notnull
+    #  uniqID:string(255)-notnull
     # status:smallint-notnull
+```
+
+### Créons le lien entre User et Article (OneToMany)
+
+```bash
+ New property name (press <return> to stop adding fields):
+ > articles
+
+ Field type (enter ? to see all types) [string]:
+ > OneToMany
+
+ What class should this entity be related to?:
+ > Article
+
+ A new property will also be added to the Article class so that you can access and set the related User object from it.
+
+ New field name inside Article [user]:
+ > 
+
+ Is the Article.user property allowed to be null (nullable)? (yes/no) [yes]:
+ > 
+
+ updated: src/Entity/User.php
+ updated: src/Entity/Article.php
+
+ Add another property? Enter the property name (or press <return> to stop adding fields):
 ```
