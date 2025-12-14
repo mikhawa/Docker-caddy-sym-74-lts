@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -40,8 +41,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      */
-    #[ORM\Column]
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Le mot de passe ne peut pas être vide.')]
+    #[Assert\Length(
+        min: 8,
+        max: 255,
+        minMessage: 'Le mot de passe doit contenir au moins {{ limit }} caractères.'
+    )]
+
     private ?string $password = null;
+
+    #[ORM\Column(length: 200)]
+    #[Assert\NotBlank(message: 'L\'email ne peut pas être vide.')]
+    #[Assert\Email(message: 'L\'email "{{ value }}" n\'est pas une adresse email valide.')]
+    private ?string $email = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $uniqId = null;
+
+    #[ORM\Column(type: Types::SMALLINT, nullable: true, options: ['unsigned' => true])]
+    private ?int $status = null;
 
     public function getId(): ?int
     {
@@ -122,5 +141,41 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials(): void
     {
         // @deprecated, to be removed when upgrading to Symfony 8
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): static
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getUniqId(): ?string
+    {
+        return $this->uniqId;
+    }
+
+    public function setUniqId(string $uniqId): static
+    {
+        $this->uniqId = $uniqId;
+
+        return $this;
+    }
+
+    public function getStatus(): ?int
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?int $status): static
+    {
+        $this->status = $status;
+
+        return $this;
     }
 }

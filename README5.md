@@ -44,7 +44,11 @@
 
 Celà modifiera les colonnes de la base de données `#[ORM\Column(àjouter les options)]` et les contraintes de validation des formulaires `#[Assert\...]`.
 
-```php
-// src/Entity/User.php
-# ...
+```bash
+    php bin/console make:entity User
+    # ajouter les champs suivants :
+    # password:string(255)-notnull
+    #  email:string(200)-notnull
+    #  uniqdI:string(255)-notnull
+    # status:smallint-notnull
 ```
