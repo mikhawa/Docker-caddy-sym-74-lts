@@ -10,21 +10,19 @@
 - [Partie 4](README4.md)
 
 
-## Créons une entité User
+## Créons une entité User (Vrai User)
 
     # ne pas oublier d'entrer dans le conteneur php
     docker compose exec -it php bash
  
     # :/var/www/html$
 
-    php bin/console make:entity Article
-    # title:string(150)-notnull
-    # slug:string(154)-notnull
-    # text:text-notnull
-    # createdAt:datetime_immutable-null
-    # updatedAt:datetime_immutable-null
-    # publishedAt:datetime_immutable-null
-    # isPublished:boolean-null
+    php bin/console make:user
+    # User
+    # Doctrine entity: yes
+    # username 
+    # hashed password yes
+
 
 ---
 
