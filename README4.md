@@ -305,3 +305,5 @@ use Doctrine\Common\Collections\Collection;
 ---
 [Menu](#menu)
 ---
+
+[Partie 5 Création de l'entité User](README5.md)

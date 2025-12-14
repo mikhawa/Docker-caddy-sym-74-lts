@@ -1,6 +1,6 @@
 # caddy-sym-74-lts
 
-## Partie 5 Création de l'enitité User
+## Partie 5 Création de l'entité User
 
 
 ## Menu
@@ -39,3 +39,12 @@
 ---
 [Menu](#menu)
 ---
+
+### Modifions l'entité User pour ajouter des valeurs par défaut
+
+Celà modifiera les colonnes de la base de données `#[ORM\Column(àjouter les options)]` et les contraintes de validation des formulaires `#[Assert\...]`.
+
+```php
+// src/Entity/User.php
+# ...
+```
