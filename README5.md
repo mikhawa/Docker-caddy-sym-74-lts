@@ -8,6 +8,15 @@
 - [Partie 2](README2.md)
 - [Partie 3](README3.md)
 - [Partie 4](README4.md)
+- [Créons une entité User (Vrai User)](#créons-une-entité-user-vrai-user)
+- [Créons la première migration de User](#créons-la-première-migration-de-user)
+- [Modifions l'entité User pour ajouter des valeurs par défaut](#modifions-lentité-user-pour-ajouter-des-valeurs-par-défaut)
+- [Créons le lien entre User et Article (OneToMany)](#créons-le-lien-entre-user-et-article-onetomany)
+- [Créons la migration de l'entité User](#créons-la-migration-de-lentité-user)
+- [Installons le composant de gestion des fixtures](#installons-le-composant-de-gestion-des-fixtures)
+- [Créons une fixture pour l'entité User](#créons-une-fixture-pour-lentité-user)
+- [Chargeons-les fixtures dans la base de données](#chargeons-les-fixtures-dans-la-base-de-données)
+- [Partie 6](README6.md)
 
 
 ## Créons une entité User (Vrai User)
@@ -30,8 +39,7 @@
 
 ---
 
-### Créons la première migration d'Article
-
+### Créons la première migration de User
     php bin/console make:migration
     php bin/console doctrine:migrations:migrate # > yes
 
@@ -165,3 +173,8 @@ class UserFixture extends Fixture
 ### Chargeons-les fixtures dans la base de données
 
     php bin/console doctrine:fixtures:load # > yes
+
+---
+[Menu](#menu)
+---
+[Partie 6](README6.md)
