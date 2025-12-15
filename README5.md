@@ -79,3 +79,46 @@ Celà modifiera les colonnes de la base de données `#[ORM\Column(àjouter les o
 
  Add another property? Enter the property name (or press <return> to stop adding fields):
 ```
+
+Le fichier `config/packages/security.yaml` modifié automatiquement pour utiliser l'entité User.
+```yaml
+security:
+    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+
+    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: username
+# ...
+```
+---
+
+[Menu](#menu)
+
+---
+
+### Créons la migration de l'entité User
+
+    php bin/console make:migration
+    php bin/console doctrine:migrations:migrate # > yes
+---
+[Menu](#menu)   
+---
+
+### Installons le composant de gestion des fixtures
+
+    composer require orm-fixtures --dev 
+
+
+
+```php
+// src/DataFixtures/AppFixtures.php
+# ...
+use App\Entity\User;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+# ...
