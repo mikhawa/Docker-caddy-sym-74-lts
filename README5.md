@@ -51,6 +51,7 @@ Celà modifiera les colonnes de la base de données `#[ORM\Column(àjouter les o
     #  email:string(200)-notnull
     #  uniqID:string(255)-notnull
     # status:smallint-notnull
+    # dateInscription:datetime_immutable-null
 ```
 
 ### Créons le lien entre User et Article (OneToMany)

@@ -52,7 +52,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     private ?string $password = null;
 
-    #[ORM\Column(length: 200)]
+    #[ORM\Column(length: 200, unique: true)]
     #[Assert\NotBlank(message: 'L\'email ne peut pas être vide.')]
     #[Assert\Email(message: 'L\'email "{{ value }}" n\'est pas une adresse email valide.')]
     private ?string $email = null;
@@ -68,6 +68,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'user')]
     private Collection $articles;
+
+    #[ORM\Column(nullable: true , options: ['default' => 'CURRENT_TIMESTAMP'])]
+    private ?\DateTimeImmutable $dateInscription = null;
 
     public function __construct()
     {
@@ -217,6 +220,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $article->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDateInscription(): ?\DateTimeImmutable
+    {
+        return $this->dateInscription;
+    }
+
+    public function setDateInscription(?\DateTimeImmutable $dateInscription): static
+    {
+        $this->dateInscription = $dateInscription;
 
         return $this;
     }
