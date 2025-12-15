@@ -114,11 +114,54 @@ security:
 
     composer require orm-fixtures --dev 
 
+### Créons une fixture pour l'entité User
 
+    php bin/console make:fixture UserFixture
+
+Modifions le fichier `src/DataFixtures/UserFixture.php` pour ajouter un seul utilisateur `admin` avec un mot de passe haché pour le moment.
+
+User:
+
+Admin
+
+PWD: admin1234
 
 ```php
-// src/DataFixtures/AppFixtures.php
-# ...
+<?php
+
+// src/DataFixtures/UserFixture.php
+
+namespace App\DataFixtures;
 use App\Entity\User;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-# ...
+class UserFixture extends Fixture
+{
+    private UserPasswordHasherInterface $passwordHasher;
+
+    public function __construct(UserPasswordHasherInterface $passwordHasher)
+    {
+        $this->passwordHasher = $passwordHasher;
+    }
+
+    public function load(ObjectManager $manager): void
+    {
+        // Création d'un utilisateur admin
+        $adminUser = new User();
+        $adminUser->setUsername('admin');
+        $adminUser->setRoles(['ROLE_ADMIN']);
+        $adminUser->setEmail('michaeljpitz@gmail.com');
+        $adminUser->setUniqID(uniqid('uq_',true));
+        $adminUser->setStatus(1); // statut actif
+        $adminUser->setDateInscription(new \DateTimeImmutable());
+        $hashedPassword = $this->passwordHasher->hashPassword($adminUser, 'admin1234');
+        $adminUser->setPassword($hashedPassword);
+        $manager->persist($adminUser);
+        $manager->flush();
+    }
+}
+```
+### Chargeons-les fixtures dans la base de données
+
+    php bin/console doctrine:fixtures:load # > yes
