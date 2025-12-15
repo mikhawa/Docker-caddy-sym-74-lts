@@ -3,10 +3,12 @@
 // src/DataFixtures/UserFixture.php
 
 namespace App\DataFixtures;
+
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
 class UserFixture extends Fixture
 {
     private UserPasswordHasherInterface $passwordHasher;
@@ -23,7 +25,7 @@ class UserFixture extends Fixture
         $adminUser->setUsername('admin');
         $adminUser->setRoles(['ROLE_ADMIN']);
         $adminUser->setEmail('michaeljpitz@gmail.com');
-        $adminUser->setUniqID(uniqid('uq_',true));
+        $adminUser->setUniqID(uniqid('uq_', true));
         $adminUser->setStatus(1); // statut actif
         $adminUser->setDateInscription(new \DateTimeImmutable());
         $hashedPassword = $this->passwordHasher->hashPassword($adminUser, 'admin1234');

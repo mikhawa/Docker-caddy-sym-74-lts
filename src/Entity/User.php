@@ -69,7 +69,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'user')]
     private Collection $articles;
 
-    #[ORM\Column(nullable: true , options: ['default' => 'CURRENT_TIMESTAMP'])]
+    #[ORM\Column(nullable: true, options: ['default' => 'CURRENT_TIMESTAMP'])]
     private ?\DateTimeImmutable $dateInscription = null;
 
     public function __construct()
