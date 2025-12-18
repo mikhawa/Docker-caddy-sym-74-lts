@@ -12,6 +12,19 @@
         {% endblock %}
     </head>
     <body>
+
+        {% block navbar %}<nav>
+            <ul>
+                <li><a href="{{ path('homepage') }}">Home</a></li>
+                {% if app.user %}
+                    <li><a href="{{ path('app_logout') }}">Logout ({{ app.user.username }})</a></li>
+                {% else %}
+                    <li><a href="{{ path('app_login') }}">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endblock %}
         {% block body %}{% endblock %}
+
     </body>
 </html>
