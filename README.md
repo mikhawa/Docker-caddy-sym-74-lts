@@ -16,6 +16,8 @@ Sous WSL2 de Windows 11
 - [Partie 2 Utilisation de Symfony avec Docker](README2.md)
 - [Partie 3 Vue d'ensemble des entités et relations](README3.md)
 - [Partie 4 Création des entités et migrations avec Symfony et Docker](README4.md)
+- [Partie 5 Création de l'entité User](README5.md)
+- [Partie 6 Créons une connexion pour l'utilisateur](README6.md)
 
 
 ## Raccourcis utiles
