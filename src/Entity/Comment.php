@@ -1,20 +1,31 @@
 <?php
 
+// src/Entity/Comment.php
+
 namespace App\Entity;
 
 use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
+// utilisation des contraintes de validation
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(options: ['unsigned' => true])]
     private ?int $id = null;
 
     #[ORM\Column(length: 2500)]
-    private ?string $text = null;
+    #[Assert\NotBlank(message: 'Le commentaire ne peut pas être vide.')]
+    #[Assert\Length(
+        min: 5,
+        max: 2200,
+        minMessage: 'Le commentaire doit comporter au moins {{ limit }} caractères.',
+        maxMessage: 'Le commentaire ne peut pas dépasser {{ limit }} caractères.'
+    )]
+        private ?string $text = null;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $createAt = null;
