@@ -18,6 +18,10 @@
 
 ## Installation d'EasyAdminBundle et création du dashboard
 
+Documentation officielle :
+
+https://symfony.com/bundles/EasyAdminBundle/current/index.html
+
     # ne pas oublier d'entrer dans le conteneur php
     docker compose exec -it php bash
 
