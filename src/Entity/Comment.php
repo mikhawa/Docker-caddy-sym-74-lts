@@ -27,13 +27,13 @@ class Comment
     )]
         private ?string $text = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(nullable: true, options: ['default' => 'CURRENT_TIMESTAMP'])]
     private ?\DateTimeImmutable $createAt = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(nullable: true, options: ['default' => null])]
     private ?\DateTimeImmutable $publishAt = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(nullable: true, options: ['default' => false])]
     private ?bool $isPublished = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
