@@ -11,6 +11,7 @@
 - [Partie 5](README5.md)
 - [Créons une connexion pour l'utilisateur admin](#créons-une-connexion-pour-lutilisateur-admin)
 - [Ajoutons le lien de connexion dans le template de la barre de navigation](#ajoutons-le-lien-de-connexion-dans-le-template-de-la-barre-de-navigation)]
+- [Partie 7 créons les autres entités](README7.md)
 
 
 ## Créons une connexion pour l'utilisateur admin
@@ -65,3 +66,5 @@ On peut maintenant se connecter et se déconnecter.
 [Menu](#menu)
 
 ---
+
+- [Partie 7 créons les autres entités](README7.md)
