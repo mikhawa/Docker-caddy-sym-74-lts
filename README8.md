@@ -46,6 +46,20 @@ https://symfony.com/bundles/EasyAdminBundle/current/index.html
 En modifiant `config/packages/security.yaml`
 
 ```yaml
+    #...
+    main:
+    lazy: true
+    provider: app_user_provider
+    form_login:
+      login_path: app_login
+      check_path: app_login
+      enable_csrf: true
+      # on redirige vers /admin après login
+      default_target_path: admin
+    logout:
+      path: app_logout
+      # where to redirect after logout
+      # target: app_any_route
     # Note: Only the *first* matching rule is applied
     access_control:
          - { path: ^/admin, roles: ROLE_ADMIN }

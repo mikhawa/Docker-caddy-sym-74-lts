@@ -23,6 +23,8 @@ security:
                 login_path: app_login
                 check_path: app_login
                 enable_csrf: true
+                # on redirige vers /admin après login
+                default_target_path: admin
             logout:
                 path: app_logout
                 # where to redirect after logout
