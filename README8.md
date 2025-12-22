@@ -33,3 +33,10 @@ https://symfony.com/bundles/EasyAdminBundle/current/index.html
     php bin/console make:admin:crud
     # Quelle entité voulez-vous gérer avec EasyAdmin? Article
     # ArticleCrudController
+
+### Vidons le cache et regardons les routes
+
+```bash
+    php bin/console cache:clear
+    php bin/console debug:router
+```
