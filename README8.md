@@ -40,3 +40,14 @@ https://symfony.com/bundles/EasyAdminBundle/current/index.html
     php bin/console cache:clear
     php bin/console debug:router
 ```
+
+### Accédons à l'interface d'administration en tant qu'administrateur uniquement !
+
+En modifiant `config/packages/security.yaml`
+
+```yaml
+    # Note: Only the *first* matching rule is applied
+    access_control:
+         - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER }
+```
