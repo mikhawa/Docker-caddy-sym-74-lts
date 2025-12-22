@@ -146,42 +146,11 @@ appuser@68e8c6a4f64f:/var/www/html$ php bin/console make:entity Comment
 
 ```
 
-
-On peut dorénavant accéder à la page de connexion via l'URL :
-http://localhost:8765/login
-
-et se connecter avec l'utilisateur :
-- username : admin
-- password : admin1234
-
+## Créons la migration de l'entité Comment
+    php bin/console make:migration
+    php bin/console doctrine:migrations:migrate # > yes
 ---
-
 [Menu](#menu)
-
 ---
 
-## Ajoutons le lien de connexion dans le template de la barre de navigation
-
-Éditons le fichier `templates/base.html.twig` et ajoutez le code suivant dans la barre de navigation (nav) :
-
-```twig
-    {% block navbar %}<nav>
-            <ul>
-                <li><a href="{{ path('app_home') }}">Home</a></li>
-                {% if app.user %}
-                    <li><a href="{{ path('app_logout') }}">Logout ({{ app.user.username }})</a></li>
-                {% else %}
-                    <li><a href="{{ path('app_login') }}">Login</a></li>
-                {% endif %}
-            </ul>
-        </nav>     
-        {% endblock %}
-```
-
-On peut maintenant se connecter et se déconnecter.
-
----
-
-[Menu](#menu)
-
----
+## Créons une entité Tag

@@ -25,7 +25,7 @@ class Comment
         minMessage: 'Le commentaire doit comporter au moins {{ limit }} caractères.',
         maxMessage: 'Le commentaire ne peut pas dépasser {{ limit }} caractères.'
     )]
-        private ?string $text = null;
+    private ?string $text = null;
 
     #[ORM\Column(nullable: true, options: ['default' => 'CURRENT_TIMESTAMP'])]
     private ?\DateTimeImmutable $createAt = null;
