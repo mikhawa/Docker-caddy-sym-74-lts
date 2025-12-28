@@ -65,3 +65,14 @@ En modifiant `config/packages/security.yaml`
          - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 ```
+
+Créons le dashboard en twig:
+
+```twig
+{# templates/admin/dashboard.html.twig #}```
+{% extends '@EasyAdmin/page/content.html.twig' %}
+```
+
+Puis faisons en sorte que notre `DashboardController` utilise ce template: `src/Controller/Admin/DashboardController.php`
+
+The CSRF token is invalid. Please try to resubmit the form.
