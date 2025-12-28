@@ -75,4 +75,12 @@ Créons le dashboard en twig:
 
 Puis faisons en sorte que notre `DashboardController` utilise ce template: `src/Controller/Admin/DashboardController.php`
 
-The CSRF token is invalid. Please try to resubmit the form.
+## The CSRF token is invalid. Please try to resubmit the form.
+
+Création d'un APP_SECRET dans le fichier .env.local
+
+```env
+php -r 'echo bin2hex(random_bytes(32));'
+# ou 
+openssl rand -hex 32
+```
