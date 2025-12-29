@@ -69,11 +69,11 @@ En modifiant `config/packages/security.yaml`
 Créons le dashboard en twig:
 
 ```twig
-{# templates/admin/dashboard.html.twig #}```
+{# templates/admin/dashboard.html.twig #}
 {% extends '@EasyAdmin/page/content.html.twig' %}
 ```
 
-Puis faisons en sorte que notre `DashboardController` utilise ce template: `src/Controller/Admin/DashboardController.php`
+Puis faisons en sorte que notre DashboardController utilise ce template: `src/Controller/Admin/DashboardController.php`
 
 ## The CSRF token is invalid. Please try to resubmit the form.
 
@@ -84,3 +84,19 @@ php -r 'echo bin2hex(random_bytes(32));'
 # ou 
 openssl rand -hex 32
 ```
+
+Le problème venait de `config/packages/csrf.yaml` en conflit avec EasyAdminBundle
+
+```yaml
+# config/packages/csrf.yaml
+# Enable stateless CSRF protection for forms and logins/logouts
+framework:
+    form:
+        csrf_protection:
+            # token_id: submit # Commenté pour laisser Symfony gérer les IDs par défaut
+
+    csrf_protection:
+        # stateless_token_ids: # Commenté pour revenir au stockage en session standard
+        #    - submit
+        #    - authenticate
+        #    - logout
