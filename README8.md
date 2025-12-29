@@ -100,3 +100,7 @@ framework:
         #    - submit
         #    - authenticate
         #    - logout
+```
+
+## Lien utiles:
+- https://symfony.com/bundles/EasyAdminBundle/current/index.html
