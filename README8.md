@@ -22,6 +22,7 @@ Documentation officielle :
 
 https://symfony.com/bundles/EasyAdminBundle/current/index.html
 
+```bash
     # ne pas oublier d'entrer dans le conteneur php
     docker compose exec -it php bash
 
@@ -33,6 +34,7 @@ https://symfony.com/bundles/EasyAdminBundle/current/index.html
     php bin/console make:admin:crud
     # Quelle entité voulez-vous gérer avec EasyAdmin? Article
     # ArticleCrudController
+```
 
 ### Vidons le cache et regardons les routes
 
@@ -75,6 +77,51 @@ Créons le dashboard en twig:
 
 Puis faisons en sorte que notre DashboardController utilise ce template: `src/Controller/Admin/DashboardController.php`
 
+```php
+<?php
+
+namespace App\Controller\Admin;
+
+use App\Entity\Article;
+use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
+use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use Symfony\Component\HttpFoundation\Response;
+
+#[AdminDashboard(routePath: '/admin', routeName: 'admin')]
+class DashboardController extends AbstractDashboardController
+{
+    public function index(): Response
+    {
+        // return parent::index();
+
+         // afficher un template personnalisé (templates/admin/dashboard.html.twig)
+         // qui hérite de '@EasyAdmin/layout.html.twig'
+         return $this->render('admin/dashboard.html.twig');
+    }
+
+    public function configureDashboard(): Dashboard
+    {
+        return Dashboard::new()
+            ->setTitle('Administration du blog')
+            ->generateRelativeUrls();
+    }
+
+    public function configureMenuItems(): iterable
+    {
+        yield MenuItem::linkToDashboard('Tableau de bord', 'fa fa-home');
+        # Lien vers la gestion des articles
+        yield MenuItem::linkToCrud('Les articles', 'fas fa-text', Article::class);
+        
+    }
+}
+```
+
+Documentation officielle :
+- https://symfony.com/bundles/EasyAdminBundle/current/dashboards.html
+
+
 ## The CSRF token is invalid. Please try to resubmit the form.
 
 Création d'un APP_SECRET dans le fichier .env.local
@@ -104,3 +151,12 @@ framework:
 
 ## Lien utiles:
 - https://symfony.com/bundles/EasyAdminBundle/current/index.html
+
+- https://symfony.com/bundles/EasyAdminBundle/current/dashboards.html
+- https://symfony.com/bundles/EasyAdminBundle/current/crud.html
+
+---
+
+[menu](README8.md)
+
+---
