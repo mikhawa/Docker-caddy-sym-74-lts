@@ -8,10 +8,14 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
+# Accès restreint aux administrateurs
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[AdminDashboard(routePath: '/admin', routeName: 'admin')]
 class DashboardController extends AbstractDashboardController
 {
+    # Accès restreint aux administrateurs
+    #[IsGranted('ROLE_ADMIN')]
     public function index(): Response
     {
         //return parent::index();
@@ -47,6 +51,7 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Tableau de bord', 'fa fa-home');
+        # Lien vers la gestion des articles
         yield MenuItem::linkToCrud('Les articles', 'fas fa-text', Article::class);
     }
 }
