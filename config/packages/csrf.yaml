@@ -2,10 +2,10 @@
 framework:
     form:
         csrf_protection:
-            token_id: submit
+            # token_id: submit # Commenté pour laisser Symfony gérer les IDs par défaut
 
     csrf_protection:
-        stateless_token_ids:
-            - submit
-            - authenticate
-            - logout
+        # stateless_token_ids: # Commenté pour revenir au stockage en session standard
+        #    - submit
+        #    - authenticate
+        #    - logout
