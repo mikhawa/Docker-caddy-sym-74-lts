@@ -1,6 +1,6 @@
 # caddy-sym-74-lts
 
-## Partie 9 Création des interfaces d'administration avec EasyAdminBundle
+## Partie 9 Création des interfaces d'administration avec EasyAdminBundle : Article
 
 
 ## Menu
@@ -13,8 +13,16 @@
 - [Partie 7](README7.md)
 - [Partie 8](README8.md)
 
-## Création des interfaces d'administration avec EasyAdminBundle
+### Création des interfaces d'administration avec EasyAdminBundle
 
 Documentation officielle :
-https://symfony.com/bundles/EasyAdminBundle/current/index.html
 
+Accueil : 
+- https://symfony.com/bundles/EasyAdminBundle/current/index.html
+
+CRUD
+- https://symfony.com/bundles/EasyAdminBundle/current/crud.html
+
+### ArticleCrudController
+
+    src/Controller/Admin/ArticleCrudController.php
