@@ -29,6 +29,7 @@ class ArticleCrudController extends AbstractCrudController
             SlugField::new('slug')->setTargetFieldName('title'),
             TextEditorField::new('text'),
             DateTimeField::new('createdAt')->hideOnForm(),
+            DateTimeField::new('updateAt')->hideOnForm(),
             DateTimeField::new('publishAt'),
             BooleanField::new('isPublished'),
         ];
