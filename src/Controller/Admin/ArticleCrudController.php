@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Article;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
@@ -28,10 +29,44 @@ class ArticleCrudController extends AbstractCrudController
             // Transforme le titre en slug
             SlugField::new('slug')->setTargetFieldName('title'),
             TextEditorField::new('text'),
-            DateTimeField::new('createdAt')->hideOnForm(),
+            // Correction du nom du champ: createAt au lieu de createdAt
+            DateTimeField::new('createAt')->hideOnForm(),
             DateTimeField::new('updateAt')->hideOnForm(),
-            DateTimeField::new('publishAt'),
-            BooleanField::new('isPublished'),
+            // On cache publishAt du formulaire car il est géré automatiquement
+            DateTimeField::new('publishAt')->hideOnForm(),
+            BooleanField::new('isPublished')->renderAsSwitch()
         ];
+    }
+
+    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        if (!$entityInstance instanceof Article) return;
+
+        $entityInstance->setCreateAt(new \DateTimeImmutable());
+        
+        if ($entityInstance->isPublished()) {
+            $entityInstance->setPublishAt(new \DateTimeImmutable());
+        }
+
+        parent::persistEntity($entityManager, $entityInstance);
+    }
+
+    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        if (!$entityInstance instanceof Article) return;
+
+        $entityInstance->setUpdateAt(new \DateTimeImmutable());
+
+        if ($entityInstance->isPublished()) {
+            // Si publié et pas de date, on met la date actuelle
+            if ($entityInstance->getPublishAt() === null) {
+                $entityInstance->setPublishAt(new \DateTimeImmutable());
+            }
+        } else {
+            // Si dépublié, on remet la date à null
+            $entityInstance->setPublishAt(null);
+        }
+
+        parent::updateEntity($entityManager, $entityInstance);
     }
 }

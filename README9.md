@@ -20,8 +20,11 @@ Documentation officielle :
 Accueil : 
 - https://symfony.com/bundles/EasyAdminBundle/current/index.html
 
-CRUD
+CRUD :
 - https://symfony.com/bundles/EasyAdminBundle/current/crud.html
+
+Les champs :
+- https://symfony.com/bundles/EasyAdminBundle/current/fields.html
 
 ### ArticleCrudController
 
