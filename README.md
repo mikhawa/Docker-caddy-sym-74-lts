@@ -143,6 +143,8 @@ services:
       context: .
       args:
         UID: 1000 # Correspond généralement à l'utilisateur WSL par défaut
+    environment:
+      TRUSTED_PROXIES: "127.0.0.1,REMOTE_ADDR"
     volumes:
       - ./:/var/www/html
     networks:
@@ -154,6 +156,7 @@ services:
     restart: unless-stopped
     ports:
       - "8765:80"
+      - "443:443"
     volumes:
       - ./:/var/www/html
       - ./Caddyfile:/etc/caddy/Caddyfile
@@ -168,6 +171,8 @@ services:
   database:
     image: mariadb:11.4 # Version stable récente
     restart: always
+    ports:
+      - "3306:3306" # Expose le port 3306 sur l'hôte pour PhpStorm
     environment:
       MARIADB_ROOT_PASSWORD: root
       MARIADB_DATABASE: app_db
@@ -202,7 +207,6 @@ volumes:
 networks:
   symfony-network:
     driver: bridge
-
 ```
 
 Puis :
