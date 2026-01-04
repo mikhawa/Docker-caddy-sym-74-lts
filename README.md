@@ -20,6 +20,7 @@ Sous WSL2 de Windows 11
 - [Partie 6 Créons une connexion pour l'utilisateur](README6.md)
 - [Partie 7 créons les autres entités](README7.md)
 - [Partie 8 Installation d'EasyAdminBundle et création du dashboard](README8.md)
+- [Partie 9 Création des interfaces d'administration avec EasyAdminBundle : Article](README9.md)
 
 
 ## Raccourcis utiles
