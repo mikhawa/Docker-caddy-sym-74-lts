@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Article
 {
     #[ORM\Id]
@@ -86,6 +87,30 @@ class Article
         $this->categories = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->tags = new ArrayCollection();
+    }
+
+    #[ORM\PrePersist]
+    public function onPrePersist(): void
+    {
+        $this->createAt = new \DateTimeImmutable();
+        
+        if ($this->isPublished) {
+            $this->publishAt = new \DateTimeImmutable();
+        }
+    }
+
+    #[ORM\PreUpdate]
+    public function onPreUpdate(): void
+    {
+        $this->updateAt = new \DateTimeImmutable();
+
+        if ($this->isPublished) {
+            if ($this->publishAt === null) {
+                $this->publishAt = new \DateTimeImmutable();
+            }
+        } else {
+            $this->publishAt = null;
+        }
     }
 
     public function getId(): ?int

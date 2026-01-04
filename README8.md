@@ -15,6 +15,7 @@
 - [Créons une entité Tag](#créons-une-entité-tag)
 - [Créons la migration de l'entité Tag](#créons-la-migration-de-lentité-tag)
 - [Partie 8](README8.md)
+- [Partie 9](README9.md)
 
 ## Installation d'EasyAdminBundle et création du dashboard
 
@@ -161,6 +162,6 @@ framework:
 
 ---
 
-[menu](README8.md)
+- [Partie 9](README9.md)
 
 ---
