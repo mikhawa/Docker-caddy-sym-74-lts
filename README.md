@@ -6,6 +6,7 @@ Sous WSL2 de Windows 11
 
 
 ## Menu
+- [Raccourcis utiles](#raccourcis-utiles)
 - Installation sous WSL2 de Windows 11
 - Création des fichiers Dockerfile, Caddyfile et docker-compose.yml
 - Création d'un projet Symfony 7.4 LTS
@@ -25,10 +26,52 @@ Sous WSL2 de Windows 11
 
 ## Raccourcis utiles
 
-    docker compose up -d --build
-    docker compose exec -it php bash
+```bash
+# ----------------------
+# Symfony Commands
+# ----------------------
+alias pbc='php bin/console'
+alias ddc='php bin/console doctrine:database:create'
+alias sssd='symfony serve -d'
+alias sss='symfony server:stop'
+alias dfl='php bin/console doctrine:fixture:load'
+alias test='vendor/bin/phpunit --testdox'
+alias csfix='./vendor/bin/php-cs-fixer fix'
 
-    exit pour sortir (du conteneur) pour git par exemple
+
+# ----------------------
+# Git Commands
+# ----------------------
+alias gs='git status'
+alias ga='git add .'
+alias gc='git commit'
+alias gps='git push'
+alias gpu='git pull'
+
+Commandes courantes : 
+
+// création de DB
+pbc d:d:c
+ou
+ddc
+
+// make:migrations
+pbc ma:mi
+
+// doctrine:migrations:migrate
+pbc d:m:m
+
+
+Console ubuntu wsl
+
+nano ~/.bashrc
+
+alias dphp='docker compose exec -it php bash'
+alias dup='docker compose up -d --build'
+alias ddo='docker compose down'
+alias phpfix='./vendor/bin/php-cs-fixer fix'
+
+```
 
 ## Installation de Docker
 
