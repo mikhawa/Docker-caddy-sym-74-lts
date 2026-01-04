@@ -7,14 +7,18 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Article;
 
 final class MainController extends AbstractController
 {
     #[Route('/', name: 'homepage')]
-    public function index(): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
-        return $this->render('main/index.html.twig', [
-            'controller_name' => 'MainController',
+        $articles = $entityManager->getRepository(Article::class)->findAll();
+        return $this->render('main/index.html.twig', [            'controller_name' => 'MainController',
+            'articles' => $articles,
+
         ]);
     }
 }
